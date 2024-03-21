@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Contacts Book</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script
+            src="https://unpkg.com/htmx.org@1.9.11"
+            integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body>
+        <form hx-post="/contact" hx-target="#contact-list">
+            <label for="name"
+                >Name:<input id="name" type="text" name="name" required
+            /></label>
+            <label for="phone_number"
+                >Number:
+                <input
+                    type="tel"
+                    id="phone_number"
+                    name="phone_number"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    required
+                />
+            </label>
+            <label for="email"
+                >Email:<input id="email" name="email" type="email" required
+            /></label>
+            <input type="submit" />
+        </form>
+        <div id="contact-list"></div>
+    </body>
+</html>
