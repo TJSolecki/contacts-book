@@ -1,6 +1,6 @@
 mod routes;
 mod types;
-use crate::routes::index;
+use crate::routes::index::index;
 use axum::{routing::get, Router};
 
 #[tokio::main]

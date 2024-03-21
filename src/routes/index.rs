@@ -1,4 +1,4 @@
-use crate::types::Index;
+use crate::types::index::Index;
 pub async fn index() -> Index {
     Index {}
 }
