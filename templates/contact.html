@@ -1,0 +1,20 @@
+<form hx-post="/contact" hx-swap="outerHTML">
+    <label for="name"
+        >Name:<input id="name" type="text" name="name" required
+    /></label>
+    <label for="phone_number"
+        >Number:
+        <input type="tel" id="phone_number" name="phone_number" required />
+    </label>
+    <label for="email"
+        >Email:<input id="email" name="email" type="text" required
+    /></label>
+    <input type="submit" />
+</form>
+<div id="contact-list" hx-swap-oob="afterbegin">
+    <li>
+        <p>{{ name }}</p>
+        <p>{{ phone_number }}</p>
+        <p>{{ email }}</p>
+    </li>
+</div>

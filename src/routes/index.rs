@@ -1,14 +1,24 @@
 use crate::types::contact::Contact;
 use crate::types::contacts_view::ContactsView;
 use crate::types::index_view::IndexView;
-pub async fn index<'a>() -> IndexView<'a> {
-    IndexView {
-        contacts_view: ContactsView {
-            contacts: vec![Contact {
-                name: "<script>console.log('foo')</script>".into(),
-                phone_number: "bar".into(),
-                email: "baz".into(),
-            }],
-        },
-    }
+use axum::extract::State;
+use axum::http::StatusCode;
+use sqlx::SqlitePool;
+
+#[axum_macros::debug_handler]
+pub async fn index(State(pool): State<SqlitePool>) -> Result<IndexView, StatusCode> {
+    let contacts: Vec<Contact> = sqlx::query_as!(
+        Contact,
+        r#"
+SELECT name, phone_number, email
+FROM contacts
+        "#,
+    )
+    .fetch_all(&pool)
+    .await
+    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    Ok(IndexView {
+        contacts_view: ContactsView { contacts },
+    })
 }

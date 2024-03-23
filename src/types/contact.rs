@@ -1,5 +1,7 @@
-pub struct Contact<'a> {
-    pub name: &'a str,
-    pub phone_number: &'a str,
-    pub email: &'a str,
+use serde::Deserialize;
+#[derive(Clone, Debug, Deserialize)]
+pub struct Contact {
+    pub name: String,
+    pub phone_number: String,
+    pub email: String,
 }
